@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,12 +55,13 @@ namespace Snake
             Overlay.Visibility = Visibility.Hidden;
             await GameLoop();
             await ShowGameOver();
+            SaveScore();
             gameState = new GameState(rows, cols);
         }
 
         private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if  (Overlay.Visibility == Visibility.Visible)
+            if (Overlay.Visibility == Visibility.Visible)
             {
                 e.Handled = true;
             }
@@ -82,7 +84,7 @@ namespace Snake
             switch (e.Key)
             {
                 case Key.Left:
-                    gameState.ChangeDirection(Direction.Left); 
+                    gameState.ChangeDirection(Direction.Left);
                     break;
                 case Key.Right:
                     gameState.ChangeDirection(Direction.Right);
@@ -175,7 +177,7 @@ namespace Snake
 
         private async Task ShowCountDown()
         {
-            for(int i = 3; i >= 1; i--)
+            for (int i = 3; i >= 1; i--)
             {
                 OverlayText.Text = i.ToString();
                 await Task.Delay(500);
@@ -190,10 +192,16 @@ namespace Snake
             OverlayText.Text = "PRESS ANY KEY TO START";
         }
 
-        private async Task SaveScore()
+        private void SaveScore()
         {
-            //save gamestate.score to file
-
+            //save gamestate.score to txt
+            string fileName = "C:\\Users\\krizs\\Desktop\\Snake\\Snake\\scorelog.txt";
+            FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+            sw.Write("\nScore: " + gameState.Score.ToString() + " Datum: " + DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss"));
+            sw.Flush();
+            sw.Close();
+            fs.Close();
         }
     }
 }
