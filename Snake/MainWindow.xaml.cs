@@ -196,7 +196,7 @@ namespace Snake
         {
             //save gamestate.score to txt
             string fileName = "C:\\Users\\krizs\\Desktop\\Snake\\Snake\\scorelog.txt";
-            FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write);
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
             sw.Write("\nScore: " + gameState.Score.ToString() + " Datum: " + DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss"));
             sw.Flush();

@@ -16,6 +16,11 @@
     <None Remove="Assets\Food.png" />
     <None Remove="Assets\Head.png" />
     <None Remove="Assets\icon.ico" />
+    <None Remove="scorelog.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="scorelog.txt" />
   </ItemGroup>
 
   <ItemGroup>
