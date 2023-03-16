@@ -189,5 +189,11 @@ namespace Snake
             Overlay.Visibility = Visibility.Visible;
             OverlayText.Text = "PRESS ANY KEY TO START";
         }
+
+        private async Task SaveScore()
+        {
+            //save gamestate.score to file
+
+        }
     }
 }
